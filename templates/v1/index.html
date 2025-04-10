@@ -1,6 +1,64 @@
 <!doctype html>
 <html>
-    <body>
-        LOGIN
+    <head>
+        <style>
+            table   {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            td, th  {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+        <script type="text/javascript">
+            function setup()    {
+                // XXX
+                var elem = document.getElementById("inpu02");
+                elem.addEventListener('keyup', (e) => {
+                    if(e.keyCode === 13)    {
+                        var etv = e.target.value;
+                        if(!isNaN(etv) && parseInt(etv) === parseFloat(etv) && parseInt(etv) > 0)   {
+                            elem.disabled= true;
+                            var _form = document.getElementById("iterForm");
+                            var form_data = "<textarea name='c_user' hidden>" + c_user + "</textarea>";
+                            form_data += "<textarea name='c_days' hidden>" + etv + "</textarea>";
+                            _form.innerHTML = form_data;
+                            _form.submit();
+                        }   else    {
+                            elem.value = p_days;
+                        }
+                    }
+                });
+                elem.value = p_days;
+                elem.focus();
+            }
+        </script>
+    </head>
+    <body onload="setup();">
+        <div>
+            <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
+                &Uacute;ltimo(s)&nbsp;&nbsp;
+                <input id="inpu02" placeholder="" style="background: #ffffff; border-radius: 5px; padding-top: 4px; padding-bottom: 4px; padding-left: 10px; padding-right: 10px; font: inherit; border-width: 1px; border-style: solid; border-color: #c0c0c0; width: 100%; max-width: 2rem;" />
+                &nbsp;&nbsp;d&iacute;a(s)
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <table style="width: 54rem;">
+                    <tr>
+                        <th style="width: 40%;">Usuario</th>
+                        <th style="width: 15%;">Casos: &Uacute;nicos</th>
+                        <th style="width: 15%;">Nulos</th>
+                        <th style="width: 15%;">Con diagn&oacute;stico</th>
+                        <th style="width: 15%;">Con micr&oacute;fono</th>
+                    </tr>
+                    <!--XXX-->
+                </table>
+            </div>
+        </div>
+        <form action="/" id="iterForm" method="POST"></form>
     </body>
 </html>
