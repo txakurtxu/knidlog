@@ -24,8 +24,10 @@ def query_db(msg):
     close_db(conn)
     return rows
 
-def query_usage(days):
+def query_usage(days, mode):
     rest_user_ids = ['kp_386dc15554fc4aff8fc1ef0fd1fe9a9e', 'kp_405ca7ce9b914d88b72a21a744f951cf', 'kp_887bc1ba30c04ec3b8d132e9f4938784', 'kp_653232fc04174a7c9dd37e5c25eefc68', 'kp_1c0745d726614813af23e36a9b65a21e']
+    if mode == 1:
+        rest_user_ids = ['placeholder']
     query = """
             SELECT DISTINCT
             P.last_name, CC.user_id, CCS.created_at, CC.id, left(CCS.clinical_history, 10), left(CCS.differential_diagnosis #>> '{}', 10), left(CCS.transcript #>> '{}', 10)

@@ -7,6 +7,11 @@ def html_db_data(s_html, db_data, c_user, c_days):
             x.append([])
         tmp_user_id = user_ids.index(row[1])
 
+        if row[0] == None or len(row[0]) == 0:
+            tmp_l = list(row)
+            tmp_l[0] = tmp_l[1]
+            row = tuple(tmp_l)
+
         case_ids = [z[0] for z in x[tmp_user_id]]
         if row[3] not in case_ids:
             tmp_case_id = len(case_ids)
