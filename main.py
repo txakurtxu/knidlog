@@ -13,7 +13,7 @@ def root():
     if request.method == "POST":
         c_user = request.form.get('c_user')
         c_days = request.form.get('c_days')
-        log_access({'email': c_user})
+        log_access({'email': c_user, 'days': c_days})
         users = get_users()
         if re.sub('\+$', '', c_user.lower()) in users:
             r_temp = html_db_data(render_template('/v1/index.html'), query_usage(int(c_days), 1 if c_user[-1: ] == "+" else 0), c_user.lower(), c_days)
