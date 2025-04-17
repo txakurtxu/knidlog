@@ -32,6 +32,7 @@ def html_db_data(s_html, db_data, c_user, c_days):
     s_repl = "<!--XXX-->"
     t_repl = ""
     u_repl = "// XXX"
+    t_uniq = t_vacu = t_diag = t_micr = 0
     for u in x:
         c_uniq = len(u)
         c_vacu = c_diag = c_micr = 0
@@ -42,6 +43,11 @@ def html_db_data(s_html, db_data, c_user, c_days):
                 c_diag += 1
             if c[2] != "":
                 c_micr += 1
+        t_uniq += c_uniq
+        t_vacu += c_vacu
+        t_diag += c_diag
+        t_micr += c_micr
         t_repl += "<tr> <th>" + u[0][4][0].upper() + u[0][4][1: ] + "</th> <th>" + str(c_uniq) + "</th> <th>" + str(c_vacu) + "</th> <th>" + str(c_diag) + "</th> <th>" + str(c_micr) + "</th> </tr>"
+    t_repl += "<tr> <th>" + "<span style='display: block; text-align: right;'>Total</span>" + "</th> <th>" + str(t_uniq) + "</th> <th>" + str(t_vacu) + "</th> <th>" + str(t_diag) + "</th> <th>" + str(t_micr) + "</th> </tr>"
 
     return s_html.replace(s_repl, t_repl).replace(u_repl, "var c_user = \"" + c_user +"\", p_days = " + c_days + ";")
