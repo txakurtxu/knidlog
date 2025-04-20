@@ -7,7 +7,9 @@ def html_db_data(s_html, db_data, c_user, c_days):
             x.append([])
         tmp_user_id = user_ids.index(row[1])
 
-        if row[0] == None or len(row[0]) == 0:
+        row = ["" if tmp_x is None else tmp_x for tmp_x in row]
+
+        if len(row[0]) == 0:
             tmp_l = list(row)
             tmp_l[0] = tmp_l[1]
             row = tuple(tmp_l)
@@ -23,7 +25,7 @@ def html_db_data(s_html, db_data, c_user, c_days):
         if row[5].strip() != "[]" and x[tmp_user_id][tmp_case_id][1] == "":
             x[tmp_user_id][tmp_case_id][1] = row[5].strip()
 
-        if row[6].strip() != "[]" and x[tmp_user_id][tmp_case_id][2] == "":
+        if row[6].strip() not in ["[]", ""] and x[tmp_user_id][tmp_case_id][2] == "":
             x[tmp_user_id][tmp_case_id][2] = row[6].strip()
 
         if row[4].strip() != "" and x[tmp_user_id][tmp_case_id][3] == "":
